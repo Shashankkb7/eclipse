@@ -3,11 +3,11 @@ package com.xworkz.boot;
 
 public class Flight {
 	
-	public int flightNumber=123456;
-	public String fuel="petrol";
-	public int weight=80000;
-	public boolean travel=true;
-	public boolean lift=true;
+	public int flightNumber;
+	public String fuel;
+	public int weight;
+	public boolean travel;
+	public boolean lift;
 	public String[] color;
 	public String[] name;
 	public String[] types;
