@@ -1,4 +1,6 @@
-package com.xworkz.boot;
+package com.xworkz.other;
+
+import com.xworkz.boot.Projector;
 
 public class ProjectorRunner {
 

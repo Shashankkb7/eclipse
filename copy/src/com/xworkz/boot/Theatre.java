@@ -1,7 +1,7 @@
 package com.xworkz.boot;
 
-import com.xworkz.constructor.Languages;
-import com.xworkz.constructor.SeatType;
+import com.xworkz.constants.Languages;
+import com.xworkz.constants.SeatType;
 
 public class Theatre {
 
@@ -14,10 +14,10 @@ public class Theatre {
 	public int[] noOfScreens;
 	public String[] filmNames;
 	public String[] effects;
-	public SeatType FIRST_CLASS;
-	public Languages KANNADA;
+	public SeatType seatType;
+	public Languages languages;
 	
-	public Theatre(String name,String location,String ownerName,boolean nonAc,int capacity,double[] ticketPrice,int[] noOfScreens,String[] filmNames,String[] effects,SeatType FIRST_CLASS,Languages KANNADA)
+	public Theatre(String name,String location,String ownerName,boolean nonAc,int capacity,double[] ticketPrice,int[] noOfScreens,String[] filmNames,String[] effects,SeatType seatType,Languages languages)
 	{
 		this.name=name;
 		this.location=location;
@@ -28,8 +28,8 @@ public class Theatre {
 		this.noOfScreens=noOfScreens;
 		this.filmNames=filmNames;
 		this.effects=effects;
-		this.FIRST_CLASS=FIRST_CLASS;
-		this.KANNADA=KANNADA;
+		this.seatType=seatType;
+		this.languages=languages;
 	
 	}
 	public void show()
@@ -39,8 +39,8 @@ public class Theatre {
 		System.out.println(this.ownerName);
 		System.out.println(this.nonAc);
 		System.out.println(this.capacity);
-		System.out.println(this.FIRST_CLASS);
-		System.out.println(this.KANNADA);
+		System.out.println(this.seatType);
+		System.out.println(this.languages);
 		
 		for (int i = 0; i < ticketPrice.length; i++) {
 			double quantity = ticketPrice[i];

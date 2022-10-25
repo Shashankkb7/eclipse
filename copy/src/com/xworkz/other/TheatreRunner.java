@@ -1,8 +1,8 @@
 package com.xworkz.other;
 
 import com.xworkz.boot.Theatre;
-import com.xworkz.constructor.Languages;
-import com.xworkz.constructor.SeatType;
+import com.xworkz.constants.Languages;
+import com.xworkz.constants.SeatType;
 
 public class TheatreRunner {
 

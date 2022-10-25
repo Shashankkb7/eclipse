@@ -1,4 +1,4 @@
-package com.xworkz.other;
+package com.xworkz.boot;
 
 public class Bread {
 
@@ -60,4 +60,6 @@ public class Bread {
 	this.companyName=companyName;
 	System.out.println("created boat using parameter double and string constant");
 	}
+
+
 }

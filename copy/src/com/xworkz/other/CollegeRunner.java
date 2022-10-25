@@ -1,8 +1,8 @@
 package com.xworkz.other;
 
 import com.xworkz.boot.College;
-import com.xworkz.constructor.Committees;
-import com.xworkz.constructor.FamousLecturers;
+import com.xworkz.constants.Committees;
+import com.xworkz.constants.FamousLecturers;
 
 
 public class CollegeRunner {

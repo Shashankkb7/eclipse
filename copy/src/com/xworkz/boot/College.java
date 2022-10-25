@@ -1,7 +1,7 @@
 package com.xworkz.boot;
 
-import com.xworkz.constructor.Committees;
-import com.xworkz.constructor.FamousLecturers;
+import com.xworkz.constants.Committees;
+import com.xworkz.constants.FamousLecturers;
 
 public class College {
 

@@ -1,4 +1,4 @@
-package com.xworkz.constructor;
+package com.xworkz.constants;
 
 public enum Committees {
 
