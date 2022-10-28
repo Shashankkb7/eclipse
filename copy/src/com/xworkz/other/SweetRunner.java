@@ -1,4 +1,4 @@
-package com.xworkz.other;
+ package com.xworkz.other;
 
 import com.xworkz.boot.Sweet;
 
