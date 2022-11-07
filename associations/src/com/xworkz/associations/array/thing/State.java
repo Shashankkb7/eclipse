@@ -16,10 +16,10 @@ public class State {
 	}
 
 	public void showOff() {
-		System.out.println(this.name);
-		System.out.println(this.cm);
-		System.out.println(this.noOfDstricts);
-		System.out.println(this.oldName);
+		System.out.println("state name:" + this.name);
+		System.out.println("state cm:" + this.cm);
+		System.out.println("state no of districts" + this.noOfDstricts);
+		System.out.println("state old name:" + this.oldName);
 	}
 
 }
