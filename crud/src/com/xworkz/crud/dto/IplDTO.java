@@ -1,8 +1,6 @@
-package com.xworkz.crud.repository;
+package com.xworkz.crud.dto;
 
-import com.xworkz.crud.dto.AbstractAuditDTO;
-
-public class IplDTO extends AbstractAuditDTO {
+public class IplDTO extends AbstractAuditDTO{
 
 	private String teamName;
 	private String ownerName;
