@@ -481,12 +481,13 @@ public class DamsRunner {
 		}
 		System.out.println("=======================================");
 
-		/*
-		 * Iterator<String> remove = damsInIndia.iterator(); while (remove.hasNext()) {
-		 * String element = remove.next(); if (element.contains("P"))
-		 * System.out.println("Removing all dams it contains P " + element);
-		 * remove.remove(); }
-		 */
+		Iterator<String> remove = damsInIndia.iterator();
+		while (remove.hasNext()) {
+			String element = remove.next();
+			if (element.contains("P"))
+				System.out.println("Removing all dams it contains P " + element);
+			remove.remove();
+		}
 
 		Iterator<String> palindrome = damsInIndia.iterator();
 		while (palindrome.hasNext()) {
