@@ -14,12 +14,12 @@ public class Season {
 		System.out.println("Creating Season using default const by Spring");
 	}
 
-	@Value("Vikings")
+	@Value("Mansoon")
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Value("25")
+	@Value("3")
 	public void setDuration(double duration) {
 		this.duration = duration;
 	}

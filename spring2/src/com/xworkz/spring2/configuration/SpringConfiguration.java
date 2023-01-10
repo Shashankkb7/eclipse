@@ -34,8 +34,8 @@ public class SpringConfiguration {
 	public Season episodes() {
 		System.out.println("Registering episodes with spring");
 		Season season = new Season();
-		season.setName("Game of thrones");
-		season.setDuration(100);
+		season.setName("Winter");
+		season.setDuration(2);
 		season.setStartingMonth("March");
 		return season;
 
