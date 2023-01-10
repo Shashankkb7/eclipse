@@ -15,8 +15,7 @@ public class Runner {
 	public static void main(String[] args) {
 
 		ApplicationContext container = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-		String[] bean=container.getBeanDefinitionNames();
-		System.out.println(Arrays.toString(bean));
+		System.out.println(Arrays.toString(container.getBeanDefinitionNames()));
 
 		Rocket refOfRocket = container.getBean("rocket",Rocket.class);
 		System.out.println(refOfRocket);
@@ -25,7 +24,7 @@ public class Runner {
 		System.out.println(refOfRocket.getBudget());
 
 		Rocket refOfRocket1 = container.getBean("spaceRocket", Rocket.class);
-		System.out.println(refOfRocket);
+		System.out.println(refOfRocket1);
 		System.out.println(refOfRocket1.getCountry());
 		System.out.println(refOfRocket1.getName());
 		System.out.println(refOfRocket1.getBudget());
