@@ -10,7 +10,7 @@ public class SoldierRepoImpl implements SoldierRepository {
 
 	@Override
 	public boolean save(SoldierDTO dto) {
-		System.out.println("Running save");
+		System.out.println("Running save SoldierRepoImpl");
 		System.out.println("Dto is passed " + dto);
 		return false;
 	}
