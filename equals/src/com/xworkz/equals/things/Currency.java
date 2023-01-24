@@ -40,10 +40,10 @@ public class Currency {
 			Currency cast3 = (Currency) obj;
 			if (this.type.equals(cast3.type) && this.color.equals(cast3.color) && this.country.equals(cast3.country)
 					&& this.acceptIn.equals(cast3.acceptIn)) {
-				System.out.println("brand,color,country and acceptIn are same");
+				System.out.println("type,color,country and acceptIn are same");
 				return true;
 			} else {
-				System.err.println("brand,color,country and countryOfOrigin are not same");
+				System.err.println("type,color,country and acceptIn are not same");
 				return false;
 			}
 		} else {

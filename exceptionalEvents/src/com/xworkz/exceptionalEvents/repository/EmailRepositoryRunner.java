@@ -1,6 +1,6 @@
 package com.xworkz.exceptionalEvents.repository;
 
-public class EmailRepositoryEunner {
+public class EmailRepositoryRunner {
 
 	public static void main(String[] args) {
 

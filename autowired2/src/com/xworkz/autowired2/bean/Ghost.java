@@ -8,6 +8,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Ghost {
+	
+	private long aadharNo;
+	private String panNo;
+	private long voterIdNo;
+	private boolean graduated;
+	private String religion;
+	private String instagramId;
+	private String snapchatId;
+	private long phNo;
+	private boolean married;
+	private boolean BPLCard;
 	@Autowired
 	@Qualifier("ghostName")
 	private String name;
@@ -38,16 +49,6 @@ public class Ghost {
 	@Autowired
 	@Qualifier("ghostDateOfDeath")
 	private LocalDate dateOfDeath;
-	private long aadharNo;
-	private String panNo;
-	private long voterIdNo;
-	private boolean graduated;
-	private String religion;
-	private String instagramId;
-	private String snapchatId;
-	private long phNo;
-	private boolean married;
-	private boolean BPLCard;
 
 	@Autowired
 	public Ghost(@Qualifier("ghostAadharNo") long aadharNo, @Qualifier("ghostPanNo") String panNo,
