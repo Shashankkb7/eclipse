@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,11 +23,12 @@
 				alt="" height="48" width="80"> </a>
 				<ul>
 				<li style="display: inline-block;padding: 20px;">
-					<a href="FoodItem.jsp" class="col-lg-2 col-sm-2">Food Item</a>
+					<a href="Beach.jsp" class="col-lg-2 col-sm-2">Beach</a>
 					<li style="display: inline-block;">
-					<a href="Interview.jsp"  class="col-lg-2 col-sm-2">Interview</a>
+					<a href="Casino.jsp"  class="col-lg-2 col-sm-2">Casino</a>
 				</ul>
 			</div>
 	</nav>
+	<h1>Welcome to Goa</h1>
 </body>
 </html>

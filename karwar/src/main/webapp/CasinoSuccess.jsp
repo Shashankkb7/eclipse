@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,16 +18,22 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#"  class="d-inline-block align-text-top"><img 
+			<a class="navbar-brand" href="#"><img
 				src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
 				alt="" height="48" width="80"> </a>
 				<ul>
 				<li style="display: inline-block;padding: 20px;">
-					<a href="FoodItem.jsp" class="col-lg-2 col-sm-2">Food Item</a>
-					<li style="display: inline-block;">
-					<a href="Interview.jsp"  class="col-lg-2 col-sm-2">Interview</a>
+				 <a href="index.jsp">Home Page</a>
+				 <li style="display: inline-block;">
+				<a href="Casino.jsp">Casino</a>
 				</ul>
-			</div>
+		</div>
 	</nav>
+<h1>Casino Entering Success</h1>
+<h2>Casino Name:${casinoName}</h2>
+<h2>Cruise Name:${cruiseName}</h2>
+<h2>Entry Fee:${entryFee}</h2>
+<h2>Free Food:${freeFood}</h2>
+<h2>Free alcohol:${freeAlcohol}</h2>
 </body>
 </html>
