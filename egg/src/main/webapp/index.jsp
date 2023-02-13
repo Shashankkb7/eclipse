@@ -26,6 +26,7 @@
 				<li style="display: inline-block;padding: 20px;">
 					<a href="Egg.jsp" class="col-lg-2 col-sm-2">Egg</a>
 					<li style="display: inline-block;">
+					<a href="CM.jsp"  class="col-lg-2 col-sm-2">CM</a>
 				</ul>
 			</div>
 	</nav>

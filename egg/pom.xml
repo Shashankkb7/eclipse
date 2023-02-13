@@ -31,9 +31,8 @@
 
 		<dependency>
 			<groupId>io.quarkus</groupId>
-			<artifactId>quarkus-junit5</artifactId>
+			<artifactId>quarkus-hibernate-validator</artifactId>
 			<version>${quarkus.lib.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
