@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class ValentineDTO {
 
+	private int id;
 	@NotBlank(message = "Name cannot be null")
 	@Size(min = 3, max = 20, message = "Name should be more than 3 or less than 20 characters")
 	private String name;

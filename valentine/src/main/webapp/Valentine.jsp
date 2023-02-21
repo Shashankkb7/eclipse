@@ -22,9 +22,13 @@
 			<a class="navbar-brand" href="#"
 				class="d-inline-block align-text-top"><img
 				src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
-				alt="" height="48" width="80"> </a> <a href="index.jsp">Home
-				Page</a>
-		</div>
+				alt="" height="48" width="80"> </a><ul>
+				 <li style="display: inline-block;padding: 20px;">
+					<a href="index.jsp" class="col-lg-2 col-sm-2">Home Page</a>
+					<li style="display: inline-block;">
+					<a href="ValentineSearch.jsp"  class="col-lg-2 col-sm-2">Valentine Search</a>
+				</ul>
+			</div>
 	</nav>
 	<h1>Welcome to Valentine data page</h1>
 	
@@ -37,12 +41,12 @@
 		<div class="mb-3">
 			<label for="formFile" class="form-label">Name</label> <input
 				type="text" class="form-control" name="name" id="formFile"
-				placeholder="Enter name" />
+				placeholder="Enter name" value="${name}"/>
 		</div>
 		<div class="mb-3">
 			<label for="formFile" class="form-label">Valentine Name</label> <input
 				type="text" class="form-control" name="valentineName" id="formFile"
-				placeholder="Enter valentine name" />
+				placeholder="Enter valentine name" value="${valentineName}"/>
 		</div>
 		Select Place <select class="form-select"
 			aria-label="Default select example" name="place">

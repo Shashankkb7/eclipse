@@ -34,15 +34,33 @@ public class ValentineServiceImpl implements ValentineService {
 			return violations;
 		} else {
 			System.out.println("Violations is not there in dto,can save");
-			ValentineEntity entity=new ValentineEntity();
+			ValentineEntity entity = new ValentineEntity();
 			entity.setName(dto.getName());
 			entity.setValentineName(dto.getValentineName());
 			entity.setPlace(dto.getPlace());
 			entity.setGift(dto.getGift());
-			boolean saved=this.valentineRepository.save(entity);
-			System.out.println("Entity data is saved "+saved);
+			boolean saved = this.valentineRepository.save(entity);
+			System.out.println("Entity data is saved " + saved);
 			return Collections.emptySet();
 		}
+	}
+
+	@Override
+	public ValentineDTO findById(int id) {
+		if (id > 0) {
+			ValentineEntity entity = this.valentineRepository.findById(id);
+			if (entity != null) {
+				System.out.println("Entity is found in service for id " + id);
+				ValentineDTO dto = new ValentineDTO();
+				dto.setName(entity.getName());
+				dto.setValentineName(entity.getValentineName());
+				dto.setPlace(entity.getPlace());
+				dto.setGift(entity.getGift());
+				dto.setId(entity.getId());
+				return dto;
+			}
+		}
+		return ValentineService.super.findById(id);
 	}
 
 }

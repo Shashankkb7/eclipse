@@ -1,4 +1,4 @@
-package com.xworkz.valentine.repository;
+package com.xworkz.aeroplane.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -7,20 +7,21 @@ import javax.persistence.EntityTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.xworkz.valentine.entity.ValentineEntity;
+import com.xworkz.aeroplane.entity.AeroplaneEntity;
 
 @Repository
-public class ValentineRepositoryImpl implements ValentineRepository {
+public class AeroplaneRepositoryImpl implements AeroplaneRepository {
+
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
-	public ValentineRepositoryImpl() {
+	public AeroplaneRepositoryImpl() {
 		System.out.println("Created " + this.getClass().getSimpleName());
 	}
 
 	@Override
-	public boolean save(ValentineEntity entity) {
-		System.out.println("running save in repository");
+	public boolean save(AeroplaneEntity entity) {
+		System.out.println("Running save in Repository");
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -31,12 +32,12 @@ public class ValentineRepositoryImpl implements ValentineRepository {
 	}
 
 	@Override
-	public ValentineEntity findById(int id) {
+	public AeroplaneEntity findById(int id) {
 		System.out.println("find by id in repo " + id);
 		EntityManager entityManager = this.entityManagerFactory.createEntityManager();
-		ValentineEntity fromDb = entityManager.find(ValentineEntity.class, id);
+		AeroplaneEntity fromDb = entityManager.find(AeroplaneEntity.class, id);
 		entityManager.close();
 		return fromDb;
-
 	}
+
 }

@@ -12,12 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xworkz.valentine.dto.ValentineDTO;
 import com.xworkz.valentine.service.ValentineService;
 
 @Controller
-@RequestMapping("/valentine")
+@RequestMapping("/")
 public class ValentineController {
 
 	@Autowired
@@ -30,7 +31,7 @@ public class ValentineController {
 		System.out.println("Created " + this.getClass().getSimpleName());
 	}
 
-	@GetMapping
+	@GetMapping("/valentine")
 	public String onValentine(Model model) {
 		System.out.println("Running onValentine Get method");
 		List<String> places = Arrays.asList("Cubbon park", "BTM", "Lalbagh", "Jp nagar");
@@ -39,8 +40,20 @@ public class ValentineController {
 		model.addAttribute("gifts", gifts);
 		return "Valentine";
 	}
+	
+	@GetMapping("/search")
+	public String onSearch(@RequestParam int id,Model model) {
+		System.out.println("Running on search for id "+id);
+		ValentineDTO dto=this.valentineService.findById(id);
+		if(dto!=null) {
+			model.addAttribute("dto",dto);
+		}else {
+			model.addAttribute("message","Data not found");
+		}
+		return "ValentineSearch";
+	}
 
-	@PostMapping
+	@PostMapping("/valentine")
 	public String onValentine(Model model, ValentineDTO dto) {
 		System.out.println("Running onValentine Post method " + dto);
 		Set<ConstraintViolation<ValentineDTO>> violations = this.valentineService.validateAndSave(dto);
