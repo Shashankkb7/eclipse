@@ -32,8 +32,8 @@
 	<h1>Welcome to Aeroplane Search page</h1>
 	<h3><span style="color:red">${message}</span></h3>
 	<form action="search" method="get">
-	Search By Id<input type="text" name="id"/>
-	<input type="submit" value="search"/>
+	Search By Id<input type="text" name="id"required="required" />
+	 <input type="submit" value="search"/>
 	</form>
 	<div>
 	<h4>Search Results</h4>

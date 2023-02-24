@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.xworkz.aeroplane.cofiguration;
 
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
