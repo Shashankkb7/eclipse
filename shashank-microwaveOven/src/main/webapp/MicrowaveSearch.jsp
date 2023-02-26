@@ -22,15 +22,27 @@
 			<a class="navbar-brand" href="#"
 				class="d-inline-block align-text-top"><img
 				src="https://x-workz.in/static/media/Logo.cf195593dc1b3f921369.png"
-				alt="" height="48" width="80"> </a>
-				<ul>
+				alt="" height="48" width="80"> </a><ul>
 				<li style="display: inline-block;padding: 20px;">
-					<a href="microwave" class="col-lg-2 col-sm-2">Aeroplane Register</a>
+					<a href="index.jsp" class="col-lg-2 col-sm-2">Home Page</a>
 					<li style="display: inline-block;">
-					<a href="AeroplaneSearch.jsp"  class="col-lg-2 col-sm-2">Aeroplane Search</a>
+					<a href="microwave" class="col-lg-2 col-sm-2">Microwave Register</a>
 				</ul>
 			</div>
 	</nav>
-	<h1>Welcome to Big Basket</h1>
+	<h1>Welcome to Microwave Search page</h1>
+	<h3><span style="color:red">${message}</span></h3>
+	<form action="search" method="get">
+	Search By Id<input type="text" name="id"/>
+	<input type="submit" value="search"/>
+	</form>
+	<div>
+	<h4>Search Results</h4>
+	Name:${dto.name}<br>
+	Price:${dto.price}<br>
+	Capacity:${dto.capacity}<br>
+	Color:${dto.color}<br>
+	Since:${dto.since}<br>
+	</div>
 </body>
 </html>

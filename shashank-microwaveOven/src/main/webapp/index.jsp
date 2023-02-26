@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,12 +25,12 @@
 				alt="" height="48" width="80"> </a>
 				<ul>
 				<li style="display: inline-block;padding: 20px;">
-					<a href="microwave" class="col-lg-2 col-sm-2">Aeroplane Register</a>
+					<a href="microwave" class="col-lg-2 col-sm-2">Microwave Register</a>
 					<li style="display: inline-block;">
-					<a href="AeroplaneSearch.jsp"  class="col-lg-2 col-sm-2">Aeroplane Search</a>
+					<a href="MicrowaveSearch.jsp"  class="col-lg-2 col-sm-2">Microwave Search</a>
 				</ul>
 			</div>
 	</nav>
-	<h1>Welcome to Big Basket</h1>
+	<h1>Welcome to Microwave Oven</h1>
 </body>
 </html>

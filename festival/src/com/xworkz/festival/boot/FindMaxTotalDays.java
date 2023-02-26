@@ -5,7 +5,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-
 public class FindMaxTotalDays {
 
 	public static void main(String[] args) {
