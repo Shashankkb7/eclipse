@@ -1,6 +1,8 @@
 package com.xworkz.oven.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -64,5 +66,31 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			}
 		}
 		return MicrowaveService.super.findById(id);
+	}
+
+	@Override
+	public List<MicrowaveDTO> findByName(String name) {
+		System.out.println("Running findByName in service " + name);
+		if (name != null && !name.isEmpty()) {
+			System.out.println("Name is valid calling repo");
+			List<MicrowaveEntity> entities = this.microwaveRepository.findByName(name);
+			List<MicrowaveDTO> listOfDTO = new ArrayList<MicrowaveDTO>();
+			for (MicrowaveEntity entity : entities) {
+				MicrowaveDTO dto = new MicrowaveDTO();
+				dto.setId(entity.getId());
+				dto.setName(entity.getName());
+				dto.setCapacity(entity.getCapacity());
+				dto.setColor(entity.getColor());
+				dto.setPrice(entity.getPrice());
+				dto.setSince(entity.getSince());
+				listOfDTO.add(dto);
+			}
+			System.out.println("Size in dtos " + listOfDTO.size());
+			System.out.println("size in entities " + entities.size());
+			return listOfDTO;
+		} else {
+			System.err.println("Name is invalid");
+		}
+		return MicrowaveService.super.findByName(name);
 	}
 }

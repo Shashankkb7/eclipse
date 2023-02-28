@@ -39,13 +39,13 @@ public class MicrowaveController {
 	}
 
 	@GetMapping("/search")
-	public String onSearch(@RequestParam int id,Model model) {
-		System.out.println("Running on search for id "+id);
-		MicrowaveDTO dto=this.microwaveService.findById(id);
-		if(dto!=null) {
-			model.addAttribute("dto",dto);
-		}else {
-			model.addAttribute("message","Data not found");
+	public String onSearch(@RequestParam int id, Model model) {
+		System.out.println("Running on search for id " + id);
+		MicrowaveDTO dto = this.microwaveService.findById(id);
+		if (dto != null) {
+			model.addAttribute("dto", dto);
+		} else {
+			model.addAttribute("message", "Data not found");
 		}
 		return "MicrowaveSearch";
 	}
@@ -63,5 +63,17 @@ public class MicrowaveController {
 		model.addAttribute("dto", dto);
 		System.err.println("Violations in controller");
 		return "Microwave";
+	}
+
+	@GetMapping("/searchByName")
+	public String onSearchByName(@RequestParam String name, Model model) {
+		System.out.println("Running on search for name " + name);
+		List<MicrowaveDTO> dto = this.microwaveService.findByName(name);
+		if (dto != null) {
+			model.addAttribute("dto", dto);
+		} else {
+			model.addAttribute("message", "Data not found");
+		}
+		return "MicrowaveNameSearch";
 	}
 }

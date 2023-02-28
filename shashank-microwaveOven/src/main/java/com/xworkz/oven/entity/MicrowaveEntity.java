@@ -3,6 +3,7 @@ package com.xworkz.oven.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "microwave_table")
+@NamedQuery(name = "findByName", query = "select ent from MicrowaveEntity ent where ent.name=:nam")
 public class MicrowaveEntity {
 	@Id
 	@Column(name = "m_id")
