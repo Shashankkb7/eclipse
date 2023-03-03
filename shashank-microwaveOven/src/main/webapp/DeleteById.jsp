@@ -30,12 +30,8 @@
 				</ul>
 			</div>
 	</nav>
-	<h1>Welcome to Microwave Name Search page</h1>
-	<span style="color: red">${msg}</span>
-	<form action="searchByName" method="get">
-	Search By Name<input type="text" name="name"/>
-	<input type="submit" value="search"/>
-		</form>
+	<h1>Welcome to Microwave Delete page</h1>
+	<h3><span style="color:red">${message}</span></h3>
 	
 	<div>
 	<table class="table table-bordered">
@@ -46,21 +42,16 @@
 	<th>Capacity</th>
 	<th>Color</th>
 	<th>Since</th>
-	<th>Edit</th>
-	<th>Delete</th>
 	</tr>
-	<c:forEach items="${dto}" var="t">
+	
 	<tr>
-	<td>${t.id}</td>
-	<td>${t.name}</td>
-	<td>${t.price}</td>
-	<td>${t.capacity}</td>
-	<td>${t.color}</td>
-	<td>${t.since}</td>
-	<td><a href="update?id=${t.id}">Edit</a></td>
-	<td><a href="delete?id=${t.id}">Delete</a></td>
+	<td>${delete.id}</td>
+	<td>${delete.name}</td>
+	<td>${delete.price}</td>
+	<td>${delete.capacity}</td>
+	<td>${delete.color}</td>
+	<td>${delete.since}</td>
 	</tr>
-	</c:forEach>
 		</table>	
 	</div>
 </body>

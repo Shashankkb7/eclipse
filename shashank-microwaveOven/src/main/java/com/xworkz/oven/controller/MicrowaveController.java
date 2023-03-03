@@ -45,7 +45,7 @@ public class MicrowaveController {
 		if (dto != null) {
 			model.addAttribute("dto", dto);
 		} else {
-			model.addAttribute("message", "Data not found");
+			model.addAttribute("msg", "Data not found");
 		}
 		return "MicrowaveSearch";
 	}
@@ -72,8 +72,42 @@ public class MicrowaveController {
 		if (dto != null) {
 			model.addAttribute("dto", dto);
 		} else {
-			model.addAttribute("message", "Data not found");
+			model.addAttribute("message1", "Data not found");
 		}
 		return "MicrowaveNameSearch";
+	}
+
+	@GetMapping("/update")
+	public String onUpdate(@RequestParam int id, Model model) {
+		System.out.println("Running on update in get " + id);
+		MicrowaveDTO dto = this.microwaveService.findById(id);
+		model.addAttribute("dto", dto);
+		model.addAttribute("colors", colors);
+		return "UpdateMicrowave";
+	}
+
+	@PostMapping("/update")
+	public String onUpdate(MicrowaveDTO dto, Model model) {
+		System.out.println("Running on update in post " + dto);
+		Set<ConstraintViolation<MicrowaveDTO>> violations = this.microwaveService.validateAndUpdate(dto);
+		if (violations.size() > 0) {
+			model.addAttribute("errors", violations);
+		} else {
+			model.addAttribute("message2", "Microwave update success");
+		}
+		return "UpdateMicrowave";
+	}
+
+	@GetMapping("/delete")
+	public String onDelete(@RequestParam int id, Model model) {
+		System.out.println("Running on delete in post ");
+		MicrowaveDTO dto = this.microwaveService.deleteById(id);
+		if (dto != null) {
+			model.addAttribute("delete", dto);
+			return "DeleteById";
+		} else {
+			model.addAttribute("message3", "Data not found");
+			return "UpdateMicrowave";
+		}
 	}
 }

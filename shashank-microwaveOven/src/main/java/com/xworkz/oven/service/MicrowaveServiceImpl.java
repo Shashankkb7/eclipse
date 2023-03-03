@@ -43,6 +43,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			entity.setCapacity(dto.getCapacity());
 			entity.setColor(dto.getColor());
 			entity.setSince(dto.getSince());
+			entity.setId(dto.getId());
 			boolean saved = this.microwaveRepository.save(entity);
 			System.out.println("Entity data is saved " + saved);
 			return Collections.emptySet();
@@ -93,4 +94,47 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 		}
 		return MicrowaveService.super.findByName(name);
 	}
+
+	@Override
+	public Set<ConstraintViolation<MicrowaveDTO>> validateAndUpdate(MicrowaveDTO dto) {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+		Set<ConstraintViolation<MicrowaveDTO>> violations = validator.validate(dto);
+		if (violations != null && !violations.isEmpty()) {
+			System.err.println("Violations in dto " + dto);
+			return violations;
+		} else {
+			System.out.println("Violations is not there in dto,can save");
+			MicrowaveEntity entity = new MicrowaveEntity();
+			entity.setName(dto.getName());
+			entity.setPrice(dto.getPrice());
+			entity.setCapacity(dto.getCapacity());
+			entity.setColor(dto.getColor());
+			entity.setSince(dto.getSince());
+			entity.setId(dto.getId());
+			boolean saved = this.microwaveRepository.update(entity);
+			System.out.println("Entity data is saved " + saved);
+			return Collections.emptySet();
+		}
+	}
+
+	@Override
+	public MicrowaveDTO deleteById(int id) {
+		if (id > 0) {
+			MicrowaveEntity entity = this.microwaveRepository.deleteById(id);
+			if (entity != null) {
+				System.out.println("Entity is found in service for id " + id);
+				MicrowaveDTO dto = new MicrowaveDTO();
+				dto.setName(entity.getName());
+				dto.setPrice(entity.getPrice());
+				dto.setCapacity(entity.getCapacity());
+				dto.setColor(entity.getColor());
+				dto.setSince(entity.getSince());
+				dto.setId(entity.getId());
+				return dto;
+			}
+		}
+		return MicrowaveService.super.deleteById(id);
+	}
+	
 }

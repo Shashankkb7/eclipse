@@ -59,4 +59,34 @@ public class MicrowaveRepositoryImpl implements MicrowaveRepository {
 			System.out.println("Released the connection");
 		}
 	}
+
+	@Override
+	public boolean update(MicrowaveEntity entity) {
+		EntityManager manager = this.entityManagerFactory.createEntityManager();
+		try {
+			EntityTransaction transaction = manager.getTransaction();
+			transaction.begin();
+			manager.merge(entity);
+			transaction.commit();
+			return true;
+		} finally {
+			manager.close();
+		}
+	}
+
+	@Override
+	public MicrowaveEntity deleteById(int id) {
+		EntityManager manager = this.entityManagerFactory.createEntityManager();
+		try {
+			EntityTransaction transaction = manager.getTransaction();
+			MicrowaveEntity manager2 = manager.find(MicrowaveEntity.class, id);
+			transaction.begin();
+			manager.remove(manager2);
+			transaction.commit();
+			return manager2;
+		} finally {
+			manager.close();
+		}
+	}
+
 }

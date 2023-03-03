@@ -9,11 +9,18 @@ public interface MicrowaveRepository {
 
 	boolean save(MicrowaveEntity entity);
 
+	boolean update(MicrowaveEntity entity);
+
 	default MicrowaveEntity findById(int id) {
+		return null;
+	}
+
+	default MicrowaveEntity deleteById(int id) {
 		return null;
 	}
 
 	default List<MicrowaveEntity> findByName(String name) {
 		return Collections.emptyList();
 	}
+
 }
