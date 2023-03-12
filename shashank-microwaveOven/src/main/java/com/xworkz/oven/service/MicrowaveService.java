@@ -15,7 +15,7 @@ public interface MicrowaveService {
 	default MicrowaveDTO findById(int id) {
 		return null;
 	}
-	
+
 	default MicrowaveDTO deleteById(int id) {
 		return null;
 	}
@@ -23,6 +23,18 @@ public interface MicrowaveService {
 	default List<MicrowaveDTO> findByName(String name) {
 		return Collections.emptyList();
 	}
+	
+	default List<MicrowaveDTO> findByColor(String color) {
+		return Collections.emptyList();
+	}
 
+	default List<MicrowaveDTO> findByNameAndColor(String name,String color) {
+		return Collections.emptyList();
+	}
+	
 	Set<ConstraintViolation<MicrowaveDTO>> validateAndUpdate(MicrowaveDTO dto);
+
+	default List<MicrowaveDTO> findAll() {
+		return Collections.emptyList();
+	}
 }

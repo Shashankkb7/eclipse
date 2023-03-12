@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,12 +30,20 @@
 				</ul>
 			</div>
 	</nav>
-	<h1>Welcome to Microwave Name Search page</h1>
+	<h1>Welcome to Microwave Name and Color Search page</h1>
+	<c:forEach items="${errors}" var="e">
+		<span style="color: red;">${e.message3}</span>
+	</c:forEach>
 	<span style="color: red">${message1}</span>
-	<form action="searchByName" method="get">
-	Search By Name<input type="text" name="name"/>
+	<span style="color: red;">${message2}</span>
+	<span style="color: red;">${message3}</span>
+	<form action="searchByNameAndColor" method="get">
+	Search By Name<input type="text" name="name" value=""/>
+	Search By Color<input type="text"name="color" value=""/>
 	<input type="submit" value="search"/>
-		</form>
+	</form>
+	
+	
 	
 	<div>
 	<table class="table table-bordered">
@@ -49,18 +57,46 @@
 	<th>Edit</th>
 	<th>Delete</th>
 	</tr>
-	<c:forEach items="${dto}" var="t">
+	
+	<c:forEach items="${dto}" var="n">
 	<tr>
-	<td>${t.id}</td>
-	<td>${t.name}</td>
-	<td>${t.price}</td>
-	<td>${t.capacity}</td>
-	<td>${t.color}</td>
-	<td>${t.since}</td>
-	<td><a href="update?id=${t.id}">Edit</a></td>
-	<td><a href="delete?id=${t.id}">Delete</a></td>
+	<td>${n.id}</td>
+	<td>${n.name}</td>
+	<td>${n.price}</td>
+	<td>${n.capacity}</td>
+	<td>${n.color}</td>
+	<td>${n.since}</td>
+	<td><a href="update?id=${n.id}">Edit</a></td>
+	<td><a href="delete?id=${n.id}">Delete</a></td>
 	</tr>
 	</c:forEach>
+	
+	<c:forEach items="${dtoName}" var="n">
+	<tr>
+	<td>${n.id}</td>
+	<td>${n.name}</td>
+	<td>${n.price}</td>
+	<td>${n.capacity}</td>
+	<td>${n.color}</td>
+	<td>${n.since}</td>
+	<td><a href="update?id=${n.id}">Edit</a></td>
+	<td><a href="delete?id=${n.id}">Delete</a></td>
+	</tr>
+	</c:forEach>
+	
+	<c:forEach items="${dtoColor}" var="n">
+	<tr>
+	<td>${n.id}</td>
+	<td>${n.name}</td>
+	<td>${n.price}</td>
+	<td>${n.capacity}</td>
+	<td>${n.color}</td>
+	<td>${n.since}</td>
+	<td><a href="update?id=${n.id}">Edit</a></td>
+	<td><a href="delete?id=${n.id}">Delete</a></td>
+	</tr>
+	</c:forEach>
+	
 		</table>	
 	</div>
 </body>

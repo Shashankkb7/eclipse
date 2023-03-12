@@ -30,20 +30,38 @@
 				</ul>
 			</div>
 	</nav>
-	<h1>Welcome to Microwave Search page</h1>
-	
-	<h3><span style="color:red">${msg}</span></h3>
-	<form action="search" method="get">
-	Search By Id<input type="text" name="id"/>
+	<h1>Welcome to Microwave Color Search page</h1>
+	<span style="color: red">${message1}</span>
+	<form action="searchByColor" method="get">
+	Search By Color<input type="text" name="color"/>
 	<input type="submit" value="search"/>
-	</form>
+		</form>
+	
 	<div>
-	<h4>Search Results</h4>
-	Name:${dto.name}<br>
-	Price:${dto.price}<br>
-	Capacity:${dto.capacity}<br>
-	Color:${dto.color}<br>
-	Since:${dto.since}<br>
+	<table class="table table-bordered">
+	<tr>
+	<th>ID</th>
+	<th>Name</th>
+	<th>Price</th>
+	<th>Capacity</th>
+	<th>Color</th>
+	<th>Since</th>
+	<th>Edit</th>
+	<th>Delete</th>
+	</tr>
+	<c:forEach items="${dto}" var="t">
+	<tr>
+	<td>${t.id}</td>
+	<td>${t.name}</td>
+	<td>${t.price}</td>
+	<td>${t.capacity}</td>
+	<td>${t.color}</td>
+	<td>${t.since}</td>
+	<td><a href="update?id=${t.id}">Edit</a></td>
+	<td><a href="delete?id=${t.id}">Delete</a></td>
+	</tr>
+	</c:forEach>
+		</table>	
 	</div>
 </body>
 </html>

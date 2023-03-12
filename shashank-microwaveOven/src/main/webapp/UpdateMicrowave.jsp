@@ -28,11 +28,10 @@
 	</nav>
 	<h1>Welcome to Microwave Update page</h1>
 
-	<c:forEach items="${errors}" var="e">
-		<br>
-		<span style="color: red;">${e.message}</span>
+	<c:forEach items="${errors}" var="f">
+		<span style="color: red;">${f.message3}</span>
 	</c:forEach>
-	<div><span style="color: green">${message}</span></div>
+	<div><span style="color: green">${message2}</span></div>
 	<form action="update" method="post">
 	<div class="mb-3">
 			<label for="formFile" class="form-label">Id</label> <input

@@ -33,7 +33,6 @@ public class MicrowaveController {
 	@GetMapping("/microwave")
 	public String onMicrowave(Model model) {
 		System.out.println("Running onMicrowave on get mapping");
-		List<String> colors = Arrays.asList("Red", "Black", "White", "Blue");
 		model.addAttribute("colors", colors);
 		return "Microwave";
 	}
@@ -59,7 +58,7 @@ public class MicrowaveController {
 			return "Microwave";
 		}
 		model.addAttribute("colors", colors);
-		model.addAttribute("errors", violations);
+		model.addAttribute("msg", violations);
 		model.addAttribute("dto", dto);
 		System.err.println("Violations in controller");
 		return "Microwave";
@@ -76,6 +75,52 @@ public class MicrowaveController {
 		}
 		return "MicrowaveNameSearch";
 	}
+	
+	@GetMapping("/searchByColor")
+	public String onSearchByColor(@RequestParam String color, Model model) {
+		System.out.println("Running on search for color " + color);
+		List<MicrowaveDTO> dto = this.microwaveService.findByColor(color);
+		if (dto != null) {
+			model.addAttribute("dto", dto);
+		} else {
+			model.addAttribute("message1", "Data not found");
+		}
+		return "MicrowaveColorSearch";
+	}
+	
+	@GetMapping("/searchByNameAndColor")
+	public String onSearchByNameAndColor(@RequestParam String name, @RequestParam String color,Model model) {
+		System.out.println("Running on search for name and color " + name + color);
+		if(name.isEmpty() || !color.isEmpty()){
+			List<MicrowaveDTO> dtoName=this.microwaveService.findByName(name);
+			System.out.println("Name size "+dtoName.size());
+			if(dtoName.size()!=0) {
+				model.addAttribute("dtoName",dtoName);
+				return "MicrowaveNameAnColorSearch";
+			}else {
+				model.addAttribute("message1", "Data not found");
+				return "MicrowaveNameAnColorSearch";			}
+			
+		}else if(!name.isEmpty() || color.isEmpty()) {
+			List<MicrowaveDTO> dtoColor=this.microwaveService.findByColor(color);
+			System.out.println("Color size "+dtoColor.size());
+			if(dtoColor.size()!=0) {
+				model.addAttribute("dtoColor",dtoColor);
+				return "MicrowaveNameAnColorSearch";
+			}else {
+				model.addAttribute("message2", "Data not found");
+				return "MicrowaveNameAnColorSearch";
+		}
+		}else {
+			List<MicrowaveDTO> dto=this.microwaveService.findByNameAndColor(name, color);
+			if (dto != null) {
+				model.addAttribute("dto", dto);
+			} else {
+				model.addAttribute("message3", "Data not found");
+			}
+			return "MicrowaveNameAnColorSearch";
+		}
+}	
 
 	@GetMapping("/update")
 	public String onUpdate(@RequestParam int id, Model model) {
@@ -109,6 +154,18 @@ public class MicrowaveController {
 			model.addAttribute("message3", "Data not found");
 			return "UpdateMicrowave";
 		}
+	}
+	
+	@GetMapping("/all")
+	public String onSearchAll(Model model) {
+		System.out.println("Running on search for all ");
+		List<MicrowaveDTO> dto = this.microwaveService.findAll();
+		if (dto != null) {
+			model.addAttribute("dto", dto);
+		} else {
+			model.addAttribute("message1", "Data not found");
+		}
+		return "MicrowaveSearchAll";
 	}
 }
 

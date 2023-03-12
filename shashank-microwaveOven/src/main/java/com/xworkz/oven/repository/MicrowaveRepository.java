@@ -22,5 +22,16 @@ public interface MicrowaveRepository {
 	default List<MicrowaveEntity> findByName(String name) {
 		return Collections.emptyList();
 	}
+	
+	default List<MicrowaveEntity> findByColor(String color) {
+		return Collections.emptyList();
+	}
 
+	default List<MicrowaveEntity> findByNameAndColor(String name,String color) {
+		return Collections.emptyList();
+	}
+	
+	default List<MicrowaveEntity> findAll() {
+		return Collections.emptyList();
+	}
 }

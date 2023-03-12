@@ -26,10 +26,16 @@
 			<ul>
 				<li style="display: inline-block; padding: 20px;"><a
 					href="microwave" class="col-lg-2 col-sm-2">Microwave Register</a>
-				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
 					href="MicrowaveSearch.jsp" class="col-lg-2 col-sm-2">Microwave Search</a>
 				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
 					href="MicrowaveNameSearch.jsp" class="col-lg-2 col-sm-2">MicrowaveName Search</a>
+				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+					href="all" class="col-lg-2 col-sm-2">MicrowaveAll Search</a>
+				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+					href="MicrowaveColorSearch.jsp" class="col-lg-2 col-sm-2">MicrowaveColor Search</a>
+				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+					href="MicrowaveNameAnColorSearch.jsp" class="col-lg-2 col-sm-2">MicrowaveNameAndColor Search</a>
 			</ul>
 		</div>
 	</nav>
