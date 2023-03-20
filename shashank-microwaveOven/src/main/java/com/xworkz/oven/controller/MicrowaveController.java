@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.xworkz.oven.dto.MicrowaveDTO;
 import com.xworkz.oven.service.MicrowaveService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/")
+@Slf4j
 public class MicrowaveController {
 
 	@Autowired
@@ -27,19 +30,19 @@ public class MicrowaveController {
 	private List<String> colors = Arrays.asList("Red", "Black", "White", "Blue");
 
 	public MicrowaveController() {
-		System.out.println("Created " + this.getClass().getSimpleName());
+		log.info("Created " + this.getClass().getSimpleName());
 	}
 
 	@GetMapping("/microwave")
 	public String onMicrowave(Model model) {
-		System.out.println("Running onMicrowave on get mapping");
+		log.info("Running onMicrowave on get mapping");
 		model.addAttribute("colors", colors);
 		return "Microwave";
 	}
 
 	@GetMapping("/search")
 	public String onSearch(@RequestParam int id, Model model) {
-		System.out.println("Running on search for id " + id);
+		log.info("Running on search for id " + id);
 		MicrowaveDTO dto = this.microwaveService.findById(id);
 		if (dto != null) {
 			model.addAttribute("dto", dto);
@@ -51,10 +54,10 @@ public class MicrowaveController {
 
 	@PostMapping("/microwave")
 	public String onMicrowave(Model model, MicrowaveDTO dto) {
-		System.out.println("Running onMicrowave on post mapping" + dto);
+		log.info("Running onMicrowave on post mapping" + dto);
 		Set<ConstraintViolation<MicrowaveDTO>> violations = this.microwaveService.validateAndSave(dto);
 		if (violations.isEmpty()) {
-			System.out.println("No violations in controler go to success page");
+			log.info("No violations in controler go to success page");
 			return "Microwave";
 		}
 		model.addAttribute("colors", colors);
@@ -66,7 +69,7 @@ public class MicrowaveController {
 
 	@GetMapping("/searchByName")
 	public String onSearchByName(@RequestParam String name, Model model) {
-		System.out.println("Running on search for name " + name);
+		log.info("Running on search for name " + name);
 		List<MicrowaveDTO> dto = this.microwaveService.findByName(name);
 		if (dto != null) {
 			model.addAttribute("dto", dto);
@@ -78,7 +81,7 @@ public class MicrowaveController {
 	
 	@GetMapping("/searchByColor")
 	public String onSearchByColor(@RequestParam String color, Model model) {
-		System.out.println("Running on search for color " + color);
+		log.info("Running on search for color " + color);
 		List<MicrowaveDTO> dto = this.microwaveService.findByColor(color);
 		if (dto != null) {
 			model.addAttribute("dto", dto);
@@ -90,10 +93,10 @@ public class MicrowaveController {
 	
 	@GetMapping("/searchByNameAndColor")
 	public String onSearchByNameAndColor(@RequestParam String name, @RequestParam String color,Model model) {
-		System.out.println("Running on search for name and color " + name + color);
+		log.info("Running on search for name and color " + name + color);
 		if(!name.isEmpty() && color.isEmpty()){
 			List<MicrowaveDTO> dtoName=this.microwaveService.findByName(name);
-			System.out.println("Name size "+dtoName.size());
+			log.info("Name size "+dtoName.size());
 			if(dtoName.size()!=0) {
 				model.addAttribute("dtoName",dtoName);
 				return "MicrowaveNameAnColorSearch";
@@ -104,7 +107,7 @@ public class MicrowaveController {
 			
 		}else if(name.isEmpty() && !color.isEmpty()) {
 			List<MicrowaveDTO> dtoColor=this.microwaveService.findByColor(color);
-			System.out.println("Color size "+dtoColor.size());
+			log.info("Color size "+dtoColor.size());
 			if(dtoColor.size()!=0) {
 				model.addAttribute("dtoColor",dtoColor);
 				return "MicrowaveNameAnColorSearch";
@@ -127,7 +130,7 @@ public class MicrowaveController {
 
 	@GetMapping("/update")
 	public String onUpdate(@RequestParam int id, Model model) {
-		System.out.println("Running on update in get " + id);
+		log.info("Running on update in get " + id);
 		MicrowaveDTO dto = this.microwaveService.findById(id);
 		model.addAttribute("dto", dto);
 		model.addAttribute("colors", colors);
@@ -136,7 +139,7 @@ public class MicrowaveController {
 
 	@PostMapping("/update")
 	public String onUpdate(MicrowaveDTO dto, Model model) {
-		System.out.println("Running on update in post " + dto);
+		log.info("Running on update in post " + dto);
 		Set<ConstraintViolation<MicrowaveDTO>> violations = this.microwaveService.validateAndUpdate(dto);
 		if (violations.size() > 0) {
 			model.addAttribute("errors", violations);
@@ -148,7 +151,7 @@ public class MicrowaveController {
 
 	@GetMapping("/delete")
 	public String onDelete(@RequestParam int id, Model model) {
-		System.out.println("Running on delete in post ");
+		log.info("Running on delete in post ");
 		MicrowaveDTO dto = this.microwaveService.deleteById(id);
 		if (dto != null) {
 			model.addAttribute("delete", dto);
@@ -161,7 +164,7 @@ public class MicrowaveController {
 	
 	@GetMapping("/all")
 	public String onSearchAll(Model model) {
-		System.out.println("Running on search for all ");
+		log.info("Running on search for all ");
 		List<MicrowaveDTO> dto = this.microwaveService.findAll();
 		if (dto != null) {
 			model.addAttribute("dto", dto);

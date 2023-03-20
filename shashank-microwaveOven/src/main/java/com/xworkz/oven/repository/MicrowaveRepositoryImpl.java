@@ -12,19 +12,22 @@ import org.springframework.stereotype.Repository;
 
 import com.xworkz.oven.entity.MicrowaveEntity;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class MicrowaveRepositoryImpl implements MicrowaveRepository {
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
 	public MicrowaveRepositoryImpl() {
-		System.out.println("Created " + this.getClass().getSimpleName());
+		log.info("Created " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	public boolean save(MicrowaveEntity entity) {
-		System.out.println("Running save in Repository");
+		log.info("Running save in Repository");
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
@@ -36,7 +39,7 @@ public class MicrowaveRepositoryImpl implements MicrowaveRepository {
 
 	@Override
 	public MicrowaveEntity findById(int id) {
-		System.out.println("find by id in repo " + id);
+		log.info("find by id in repo " + id);
 		EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		MicrowaveEntity fromDb = entityManager.find(MicrowaveEntity.class, id);
 		entityManager.close();
@@ -45,18 +48,18 @@ public class MicrowaveRepositoryImpl implements MicrowaveRepository {
 
 	@Override
 	public List<MicrowaveEntity> findByName(String name) {
-		System.out.println("Running findByName in repository " + name);
+		log.info("Running findByName in repository " + name);
 		EntityManager manager = this.entityManagerFactory.createEntityManager();
 		try {
 			Query query = manager.createNamedQuery("findByName");
 			query.setParameter("nam", name);
-			System.out.println("query : " + query);
+			log.info("query : " + query);
 			List<MicrowaveEntity> list = query.getResultList();
-			System.out.println("Total list found in repo " + list.size());
+			log.info("Total list found in repo " + list.size());
 			return list;
 		} finally {
 			manager.close();
-			System.out.println("Released the connection");
+			log.info("Released the connection");
 		}
 	}
 
@@ -92,53 +95,53 @@ public class MicrowaveRepositoryImpl implements MicrowaveRepository {
 	
 	@Override
 	public List<MicrowaveEntity> findByColor(String color) {
-		System.out.println("Running findByColor in repository " + color);
+		log.info("Running findByColor in repository " + color);
 		EntityManager manager = this.entityManagerFactory.createEntityManager();
 		try {
 			Query query = manager.createNamedQuery("findByColor");
 			query.setParameter("col", color);
-			System.out.println("query : " + query);
+			log.info("query : " + query);
 			List<MicrowaveEntity> list = query.getResultList();
-			System.out.println("Total list found in repo " + list.size());
+			log.info("Total list found in repo " + list.size());
 			return list;
 		} finally {
 			manager.close();
-			System.out.println("Released the connection");
+			log.info("Released the connection");
 		}
 	}
 	
 	
 	@Override
 	public List<MicrowaveEntity> findByNameAndColor(String name, String color) {
-		System.out.println("Running findByNameAndColor in repository " + name + color);
+		log.info("Running findByNameAndColor in repository " + name + color);
 		EntityManager manager = this.entityManagerFactory.createEntityManager();
 		try {
 			Query query = manager.createNamedQuery("findByNameAndColor");
 			query.setParameter("nam", name);
 			query.setParameter("col", color);
-			System.out.println("query : " + query);
+			log.info("query : " + query);
 			List<MicrowaveEntity> list = query.getResultList();
-			System.out.println("Total list found in repo " + list.size());
+			log.info("Total list found in repo " + list.size());
 			return list;
 		} finally {
 			manager.close();
-			System.out.println("Released the connection");
+			log.info("Released the connection");
 		}
 	}
 	
 	@Override
 	public List<MicrowaveEntity> findAll() {
-		System.out.println("Running findAll in repository ");
+		log.info("Running findAll in repository ");
 		EntityManager manager = this.entityManagerFactory.createEntityManager();
 		try {
 			Query query = manager.createNamedQuery("findAll");
-			System.out.println("query : " + query);
+			log.info("query : " + query);
 			List<MicrowaveEntity> list = query.getResultList();
-			System.out.println("Total list found in repo " + list.size());
+			log.info("Total list found in repo " + list.size());
 			return list;
 		} finally {
 			manager.close();
-			System.out.println("Released the connection");
+			log.info("Released the connection");
 		}
 	}
 }

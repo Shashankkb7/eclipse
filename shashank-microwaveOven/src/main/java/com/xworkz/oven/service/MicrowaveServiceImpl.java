@@ -18,14 +18,17 @@ import com.xworkz.oven.dto.MicrowaveDTO;
 import com.xworkz.oven.entity.MicrowaveEntity;
 import com.xworkz.oven.repository.MicrowaveRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MicrowaveServiceImpl implements MicrowaveService {
 
 	@Autowired
 	private MicrowaveRepository microwaveRepository;
 
 	public MicrowaveServiceImpl() {
-		System.out.println("Created " + this.getClass().getSimpleName());
+		log.info("Created " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			System.err.println("Violations in dto " + dto);
 			return violations;
 		} else {
-			System.out.println("Violations is not there in dto,can save");
+			log.info("Violations is not there in dto,can save");
 			MicrowaveEntity entity = new MicrowaveEntity();
 			BeanUtils.copyProperties(dto, entity);
 			/*entity.setName(dto.getName());
@@ -45,7 +48,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			entity.setSince(dto.getSince());
 			entity.setId(dto.getId());*/
 			boolean saved = this.microwaveRepository.save(entity);
-			System.out.println("Entity data is saved " + saved);
+			log.info("Entity data is saved " + saved);
 			return Collections.emptySet();
 		}
 	}
@@ -62,7 +65,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 		if (id > 0) {
 			MicrowaveEntity entity = this.microwaveRepository.findById(id);
 			if (entity != null) {
-				System.out.println("Entity is found in service for id " + id);
+				log.info("Entity is found in service for id " + id);
 				MicrowaveDTO dto = new MicrowaveDTO();
 				BeanUtils.copyProperties(entity,dto);
 				/*dto.setName(entity.getName());
@@ -79,9 +82,9 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 
 	@Override
 	public List<MicrowaveDTO> findByName(String name) {
-		System.out.println("Running findByName in service " + name);
+		log.info("Running findByName in service " + name);
 		if (name != null && !name.isEmpty()) {
-			System.out.println("Name is valid calling repo");
+			log.info("Name is valid calling repo");
 			List<MicrowaveEntity> entities = this.microwaveRepository.findByName(name);
 			List<MicrowaveDTO> listOfDTO = new ArrayList<MicrowaveDTO>();
 			for (MicrowaveEntity entity : entities) {
@@ -95,8 +98,8 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 				dto.setSince(entity.getSince());*/
 				listOfDTO.add(dto);
 			}
-			System.out.println("Size in dtos " + listOfDTO.size());
-			System.out.println("size in entities " + entities.size());
+			log.info("Size in dtos " + listOfDTO.size());
+			log.info("size in entities " + entities.size());
 			return listOfDTO;
 		} else {
 			System.err.println("Name is invalid");
@@ -106,9 +109,9 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 
 	@Override
 	public List<MicrowaveDTO> findByColor(String color) {
-		System.out.println("Running findByColor in service " + color);
+		log.info("Running findByColor in service " + color);
 		if (color != null && !color.isEmpty()) {
-			System.out.println("Color is valid calling repo");
+			log.info("Color is valid calling repo");
 			List<MicrowaveEntity> entities = this.microwaveRepository.findByColor(color);
 			List<MicrowaveDTO> listOfDTO = new ArrayList<MicrowaveDTO>();
 			for (MicrowaveEntity entity : entities) {
@@ -122,8 +125,8 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 				dto.setSince(entity.getSince());*/
 				listOfDTO.add(dto);
 			}
-			System.out.println("Size in dtos " + listOfDTO.size());
-			System.out.println("size in entities " + entities.size());
+			log.info("Size in dtos " + listOfDTO.size());
+			log.info("size in entities " + entities.size());
 			return listOfDTO;
 		} else {
 			System.err.println("Color is invalid");
@@ -133,9 +136,9 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 	
 	@Override
 	public List<MicrowaveDTO> findByNameAndColor(String name, String color) {
-		System.out.println("Running findByNameAndColor in service " + name + color);
+		log.info("Running findByNameAndColor in service " + name + color);
 		if (name != null && !name.isEmpty()) {
-			System.out.println("Name and Color is valid calling repo");
+			log.info("Name and Color is valid calling repo");
 			List<MicrowaveEntity> entities = this.microwaveRepository.findByNameAndColor(name, color);
 			List<MicrowaveDTO> listOfDTO = new ArrayList<MicrowaveDTO>();
 			for (MicrowaveEntity entity : entities) {
@@ -149,8 +152,8 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 				dto.setSince(entity.getSince());*/
 				listOfDTO.add(dto);
 			}
-			System.out.println("Size in dtos " + listOfDTO.size());
-			System.out.println("size in entities " + entities.size());
+			log.info("Size in dtos " + listOfDTO.size());
+			log.info("size in entities " + entities.size());
 			return listOfDTO;
 		} else {
 			System.err.println("Name and Color is invalid");
@@ -165,7 +168,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			System.err.println("Violations in dto " + dto);
 			return violations;
 		} else {
-			System.out.println("Violations is not there in dto,can save");
+			log.info("Violations is not there in dto,can save");
 			MicrowaveEntity entity = new MicrowaveEntity();
 			BeanUtils.copyProperties(dto,entity);
 			/*entity.setName(dto.getName());
@@ -175,7 +178,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			entity.setSince(dto.getSince());
 			entity.setId(dto.getId());*/
 			boolean saved = this.microwaveRepository.update(entity);
-			System.out.println("Entity data is saved " + saved);
+			log.info("Entity data is saved " + saved);
 			return Collections.emptySet();
 		}
 	}
@@ -185,7 +188,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 		if (id > 0) {
 			MicrowaveEntity entity = this.microwaveRepository.deleteById(id);
 			if (entity != null) {
-				System.out.println("Entity is found in service for id " + id);
+				log.info("Entity is found in service for id " + id);
 				MicrowaveDTO dto = new MicrowaveDTO();
 				BeanUtils.copyProperties(entity,dto);
 				/*dto.setName(entity.getName());
@@ -202,8 +205,8 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 	
 	@Override
 	public List<MicrowaveDTO> findAll() {
-		System.out.println("Running findAll in service ");
-			System.out.println("Entity is valid calling repo");
+		log.info("Running findAll in service ");
+			log.info("Entity is valid calling repo");
 			List<MicrowaveEntity> entities = this.microwaveRepository.findAll();
 			List<MicrowaveDTO> listOfDTO = new ArrayList<MicrowaveDTO>();
 			for (MicrowaveEntity entity : entities) {
@@ -217,8 +220,8 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 				dto.setSince(entity.getSince());*/
 				listOfDTO.add(dto);
 			}
-			System.out.println("Size in dtos " + listOfDTO.size());
-			System.out.println("size in entities " + entities.size());
+			log.info("Size in dtos " + listOfDTO.size());
+			log.info("size in entities " + entities.size());
 			return listOfDTO;
 	}
 }

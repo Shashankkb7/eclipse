@@ -36,6 +36,10 @@
 					href="MicrowaveColorSearch.jsp" class="col-lg-2 col-sm-2">MicrowaveColor Search</a>
 				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
 					href="MicrowaveNameAnColorSearch.jsp" class="col-lg-2 col-sm-2">MicrowaveNameAndColor Search</a>
+				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+					href="UploadImage.jsp" class="col-lg-2 col-sm-2">Upload image</a>
+				<li style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+				href="DisplayImage.jsp" class="col-lg-2 col-sm-2">Display image</a>
 			</ul>
 		</div>
 	</nav>
