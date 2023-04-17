@@ -35,7 +35,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 	public Set<ConstraintViolation<MicrowaveDTO>> validateAndSave(MicrowaveDTO dto) {
 		Set<ConstraintViolation<MicrowaveDTO>> violations = violations(dto);
 		if (violations != null && !violations.isEmpty()) {
-			System.err.println("Violations in dto " + dto);
+			log.info("Violations in dto " + dto);
 			return violations;
 		} else {
 			log.info("Violations is not there in dto,can save");
@@ -129,7 +129,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			log.info("size in entities " + entities.size());
 			return listOfDTO;
 		} else {
-			System.err.println("Color is invalid");
+			log.info("Color is invalid");
 		}
 		return MicrowaveService.super.findByColor(color);
 	}
@@ -156,7 +156,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 			log.info("size in entities " + entities.size());
 			return listOfDTO;
 		} else {
-			System.err.println("Name and Color is invalid");
+			log.info("Name and Color is invalid");
 		}
 		return MicrowaveService.super.findByNameAndColor(name, color);
 	}
@@ -165,7 +165,7 @@ public class MicrowaveServiceImpl implements MicrowaveService {
 	public Set<ConstraintViolation<MicrowaveDTO>> validateAndUpdate(MicrowaveDTO dto) {
 		Set<ConstraintViolation<MicrowaveDTO>> violations = violations(dto);
 		if (violations != null && !violations.isEmpty()) {
-			System.err.println("Violations in dto " + dto);
+			log.info("Violations in dto " + dto);
 			return violations;
 		} else {
 			log.info("Violations is not there in dto,can save");

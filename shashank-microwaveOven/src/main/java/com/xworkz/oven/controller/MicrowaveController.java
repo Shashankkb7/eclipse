@@ -57,13 +57,13 @@ public class MicrowaveController {
 		log.info("Running onMicrowave on post mapping" + dto);
 		Set<ConstraintViolation<MicrowaveDTO>> violations = this.microwaveService.validateAndSave(dto);
 		if (violations.isEmpty()) {
-			log.info("No violations in controler go to success page");
+			log.info("No violations in controller go to success page");
 			return "Microwave";
 		}
 		model.addAttribute("colors", colors);
 		model.addAttribute("msg", violations);
 		model.addAttribute("dto", dto);
-		System.err.println("Violations in controller");
+		log.info("Violations in controller");
 		return "Microwave";
 	}
 
