@@ -138,8 +138,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 		log.info("matching--" + passwordEncoder.matches(password, entity.getPassword()));
 		log.info("Time matching--" + entity.getLoginTime().isBefore(LocalTime.now()));
 		log.info("Present Time--" + LocalTime.now());
-		 log.info("Matching password " + passwordEncoder.matches(password,
-		 entity.getPassword()));
+		log.info("Matching password " + passwordEncoder.matches(password, entity.getPassword()));
 		log.info("Time " + LocalTime.now().isBefore(entity.getLoginTime()));
 		if (entity.getLoginCount() >= 3) {
 			log.info("Running logincount in condition ");
@@ -250,5 +249,17 @@ public class ApplicationServiceImpl implements ApplicationService {
 		}
 
 		String password = DefaultPasswordGenerator.generate(8);
+	}
+
+	@Override
+	public ApplicationDTO updateProfile(String userId, String email, Long mobile, String path) {
+		ApplicationEntity entity = this.applicationRepository.reSetPassword(email);
+		log.info("userId: " + userId + "email: " + email + "mobile: " + mobile + "image name: " + path);
+		entity.setUserId(userId);
+		entity.setMobile(mobile);
+		entity.setPicName(path);
+		boolean updated = this.applicationRepository.update(entity);
+		log.info("updated: "+updated);
+		return ApplicationService.super.updateProfile(userId, email, mobile, path);
 	}
 }

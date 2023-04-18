@@ -49,4 +49,6 @@ public class ApplicationEntity {
 	private boolean resetPassword;
 	@Column(name="a_otptimer")
 	private LocalTime loginTime;
+	@Column(name="a_picName")
+	private String picName;
 }

@@ -1,18 +1,31 @@
 package com.xworkz.commonModules.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.Set;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.xworkz.commonModules.dto.ApplicationDTO;
 import com.xworkz.commonModules.service.ApplicationService;
@@ -106,7 +119,7 @@ public class ApplicationController {
 				if (dto.isResetPassword()==true) {
 					if (!dto.getLoginTime().isAfter(LocalTime.now())) {
 						log.info("Running in time verifying condition");
-						model.addAttribute("msgs", "Time out please try again");
+						model.addAttribute("msgs", "Time out please reset password again");
 						return "SignIn";
 					}
 					model.addAttribute("userID", dto.getUserId());
@@ -119,6 +132,8 @@ public class ApplicationController {
 				log.info("UserId and password are match");
 				HttpSession httpSession= request.getSession(true);
 				httpSession.setAttribute("userId", dto.getUserId());
+				httpSession.setAttribute("dtoPic", dto.getPicName());
+				httpSession.setAttribute("dto", dto);
 				return "LoginSuccess";
 			}
 		} catch (Exception e) {
@@ -146,4 +161,45 @@ public class ApplicationController {
 		model.addAttribute("message2", "Password Update successful");
 		return "UpdatePassword";
 	}
+	
+	@PostMapping("/upload")
+	public String onUpload(@RequestParam("bhavaChitra") MultipartFile multipartFile, String userId, String email,
+			Long mobile, Model model) throws IOException
+	{
+		log.info("multipartFile" + multipartFile);
+		log.info(multipartFile.getOriginalFilename());
+		log.info(multipartFile.getContentType());
+		log.info("Size of file" + multipartFile.getSize());
+		log.info("Size of byte" + multipartFile.getBytes());
+		if (multipartFile.isEmpty()) {
+			log.info("file uploading failed");
+			model.addAttribute("error", "Please select file");
+			return "ProfileUpdate";
+		}
+		model.addAttribute("success", "Image successfully uploaded");
+		byte[] bytes = multipartFile.getBytes();
+		Path path = Paths.get("E:\\projectPhoto\\" + userId + System.currentTimeMillis() + ".jpg");
+		Files.write(path, bytes);
+		String imageName = path.getFileName().toString();
+		log.info("Image name--" + imageName);
+		log.info("Image name in tostring--" + path.toString());
+		log.info("Image file name--" + path.getFileName());
+		this.applicationService.updateProfile(userId, email, mobile, imageName);
+		return "ProfileUpdate";
+	}
+	
+	@GetMapping("/download")
+	public void onDownload(HttpServletResponse response, @RequestParam String fileName, ApplicationDTO appDto)
+			throws IOException {
+		Path path = Paths.get("E:\\projectPhoto\\" + appDto.getPicName());
+		path.toFile();
+		response.setContentType("image/jpeg");
+		File file = new File("E:\\projectPhoto\\" + fileName);
+		InputStream in = new BufferedInputStream(new FileInputStream(file));
+		ServletOutputStream out = response.getOutputStream();
+		IOUtils.copy(in, out);
+		response.flushBuffer();
+
+	}
+	
 }

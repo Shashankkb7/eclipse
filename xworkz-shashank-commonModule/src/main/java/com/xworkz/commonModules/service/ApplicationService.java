@@ -41,4 +41,8 @@ public interface ApplicationService {
 	default ApplicationDTO updatePassword(String userId, String password,String confirmPassword) {
 		return null;
 	}
+	
+	default ApplicationDTO updateProfile(String userId,String email,Long mobile,String path) {
+		return null;
+	}
 }

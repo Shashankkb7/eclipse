@@ -52,6 +52,11 @@ nav img {
 	padding: 5px;
 	margin-right: auto;
 }
+
+a {
+	color: blue;
+	text-decoration: none;
+	padding: 5px 10px;
 </style>
 </head>
 <body>
@@ -60,11 +65,20 @@ nav img {
 		<ul>
 			<li style="float:right"><a href="index.jsp">Home Page</a></li>
   			<li style="float:right"><a href="SignUp.jsp">SignUp</a></li>
- 			<li style="float:right"><a href="SignIn.jsp">SignIn</a></li>
+ 			<li style="float:right"><a href="SignIn.jsp">Logout</a></li>
  			<li style="float:right"><a class="active" href="About.jsp">About</a></li>
 		</ul>
+		<span style="color: red;">Welcome:${userId}</span>
+		  <div align="right">
+		  <img src="download?fileName=${dtoPic}" alt="">
+		  </div>
 	</nav>
+	<div align="center">
 	<h1>Login successfully</h1>
 	<h2 style="color:green">UserId : <span>${userId}</span></h2>
+	<a href="ProfileUpdate.jsp">Update profile</a> <br> 
+	<a href="Add.jsp">Add</a><br>
+	Search<input type="search">
+	</div> 
 </body>
 </html>

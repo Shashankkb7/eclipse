@@ -33,4 +33,5 @@ public class ApplicationDTO {
 	private int loginCount;
 	private boolean resetPassword;
 	private LocalTime loginTime;
+	private String picName;
 }
