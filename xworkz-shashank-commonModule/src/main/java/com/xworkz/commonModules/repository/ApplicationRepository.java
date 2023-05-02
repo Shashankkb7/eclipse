@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.xworkz.commonModules.entity.ApplicationEntity;
+import com.xworkz.commonModules.entity.TechnologyEntity;
 
 public interface ApplicationRepository {
 	
@@ -38,4 +39,14 @@ public interface ApplicationRepository {
 	boolean update(ApplicationEntity entity);
 	
 	boolean updatePassword(String userId,String password,Boolean resetPassword,LocalTime passwordChangeTime);
+	
+	boolean saveTechnology(TechnologyEntity entity);
+	
+	default List<TechnologyEntity> findByView(int id) {
+		return null;
+	}
+	
+	default ApplicationEntity findById(int id) {
+		return null;
+	}
 }

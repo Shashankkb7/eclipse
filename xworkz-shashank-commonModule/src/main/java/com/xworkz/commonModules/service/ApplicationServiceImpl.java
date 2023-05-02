@@ -28,7 +28,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.xworkz.commonModules.dto.ApplicationDTO;
+import com.xworkz.commonModules.dto.TechnologyDTO;
 import com.xworkz.commonModules.entity.ApplicationEntity;
+import com.xworkz.commonModules.entity.TechnologyEntity;
 import com.xworkz.commonModules.repository.ApplicationRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -259,7 +261,57 @@ public class ApplicationServiceImpl implements ApplicationService {
 		entity.setMobile(mobile);
 		entity.setPicName(path);
 		boolean updated = this.applicationRepository.update(entity);
-		log.info("updated: "+updated);
+		log.info("updated: " + updated);
 		return ApplicationService.super.updateProfile(userId, email, mobile, path);
 	}
+
+	@Override
+	public Set<ConstraintViolation<TechnologyDTO>> validateAndAddTechnology(TechnologyDTO dto) {
+		log.info("validateAndAddTechnology in TechnologyServiceImpl");
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+		Set<ConstraintViolation<TechnologyDTO>> violations = validator.validate(dto);
+		if (violations != null && !violations.isEmpty()) {
+			log.error("Violations in dto " + dto);
+			return violations;
+		}
+		TechnologyEntity entity = new TechnologyEntity();
+		BeanUtils.copyProperties(dto, entity);
+		boolean add = this.applicationRepository.saveTechnology(entity);
+		if (add) {
+			log.info("Technology add successfully");
+		}
+		return Collections.emptySet();
+	}
+
+	@Override
+	public List<TechnologyDTO> findByView(int id) {
+		log.info("Running findByView " + id);
+		List<TechnologyEntity> entities = this.applicationRepository.findByView(id);
+		log.info("entities size " + entities.size());
+		List<TechnologyDTO> dtos = new ArrayList<TechnologyDTO>();
+		if (!entities.isEmpty()) {
+			for (TechnologyEntity entity : entities) {
+				TechnologyDTO dto = new TechnologyDTO();
+				BeanUtils.copyProperties(entity, dto);
+				dtos.add(dto);
+			}
+			log.info("dtos size " + dtos.size());
+			return dtos;
+		}
+		return ApplicationService.super.findByView(id);
+	}
+
+	@Override
+	public ApplicationDTO findById(int id) {
+		log.info("findById " + id);
+		ApplicationEntity entity = this.applicationRepository.findById(id);
+		if (entity != null) {
+			ApplicationDTO dto = new ApplicationDTO();
+			BeanUtils.copyProperties(entity, dto);
+			return dto;
+		}
+		return ApplicationService.super.findById(id);
+	}
+
 }

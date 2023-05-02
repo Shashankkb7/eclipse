@@ -15,11 +15,13 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
-<style>
-body {
-	margin: 0;
-	padding: 0;
-	font-family: Arial, sans-serif;
+<link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"/>
+    <style>
+    body {
+  background-color: #344a72;
+  font-family: "Roboto", sans-serif;
 }
 nav {
 	background-color: #333;
@@ -68,17 +70,18 @@ a {
  			<li style="float:right"><a href="SignIn.jsp">Logout</a></li>
  			<li style="float:right"><a class="active" href="About.jsp">About</a></li>
 		</ul>
-		<span style="color: red;">Welcome:${userId}</span>
+		<span style="color: white;">Welcome:${userId}</span>
 		  <div align="right">
 		  <img src="download?fileName=${dtoPic}" alt="">
 		  </div>
 	</nav>
-	<div align="center">
-	<h1>Login successfully</h1>
-	<h2 style="color:green">UserId : <span>${userId}</span></h2>
-	<a href="ProfileUpdate.jsp">Update profile</a> <br> 
-	<a href="Add.jsp">Add</a><br>
-	Search<input type="search">
+	<div align="center" style="color: white;">
+	<h1 style="color: white;">Login successfully</h1>
+	<!-- <h2 style="color:green">UserId : <span>${userId}</span></h2> -->
+	<h3 style="color: red;">${emptyTechnologies}</h3>
+	<a style="color: red" href="ProfileUpdate.jsp">Update profile</a> <br> 
+	<a style="color: red" href="addTechnology?id=${dto.id}">Add technologies</a><br>
+	<a style="color: red" href="viewTechnology?id=${dto.id}">View technologies</a><br>
 	</div> 
 </body>
 </html>

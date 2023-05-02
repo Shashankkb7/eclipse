@@ -14,11 +14,13 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 	crossorigin="anonymous"></script>
-<style>
-body {
-	margin: 0;
-	padding: 0;
-	font-family: Arial, sans-serif;
+<link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"/>
+    <style>
+    body {
+  background-color: #344a72;
+  font-family: "Roboto", sans-serif;
 }
 nav {
 	background-color: #333;
@@ -54,13 +56,16 @@ nav img {
 
 main {
 	padding: 50px;
+	color: white;
 }
 main ul li {
 	padding: 10px;
+	color: white;
 }
 footer {
 	align-content: center;
 	text-align: center;
+	color: red;
 }
 </style>
 </head>

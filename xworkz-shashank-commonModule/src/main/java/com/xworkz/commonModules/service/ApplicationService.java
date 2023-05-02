@@ -1,11 +1,13 @@
 package com.xworkz.commonModules.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
 import com.xworkz.commonModules.dto.ApplicationDTO;
+import com.xworkz.commonModules.dto.TechnologyDTO;
 
 public interface ApplicationService {
 
@@ -43,6 +45,16 @@ public interface ApplicationService {
 	}
 	
 	default ApplicationDTO updateProfile(String userId,String email,Long mobile,String path) {
+		return null;
+	}
+	
+	Set<ConstraintViolation<TechnologyDTO>> validateAndAddTechnology(TechnologyDTO dto);
+	
+	default List<TechnologyDTO> findByView(int id) {
+		return Collections.emptyList();
+	}
+	
+	default ApplicationDTO findById(int id) {
 		return null;
 	}
 }

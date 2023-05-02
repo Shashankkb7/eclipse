@@ -6,12 +6,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.xworkz.commonModules.entity.ApplicationEntity;
+import com.xworkz.commonModules.entity.TechnologyEntity;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -147,7 +149,7 @@ public class ApplicationRepositoryImpl implements ApplicationRepository {
 			manager.close();
 		}
 	}
-	
+
 	@Override
 	public ApplicationEntity reSetPassword(String email) {
 		EntityManager em = this.entityManagerFactory.createEntityManager();
@@ -162,7 +164,7 @@ public class ApplicationRepositoryImpl implements ApplicationRepository {
 			em.close();
 		}
 	}
-	
+
 	@Override
 	public boolean update(ApplicationEntity entity) {
 		EntityManager em = this.entityManagerFactory.createEntityManager();
@@ -176,9 +178,9 @@ public class ApplicationRepositoryImpl implements ApplicationRepository {
 			em.close();
 		}
 	}
-	
+
 	@Override
-	public boolean updatePassword(String userId, String password, Boolean resetPassword,LocalTime passwordChangeTime) {
+	public boolean updatePassword(String userId, String password, Boolean resetPassword, LocalTime passwordChangeTime) {
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		try {
 			EntityTransaction et = em.getTransaction();
@@ -194,6 +196,63 @@ public class ApplicationRepositoryImpl implements ApplicationRepository {
 		} finally {
 			em.close();
 		}
+	}
+
+	@Override
+	public boolean saveTechnology(TechnologyEntity entity) {
+		log.info("Running saveTechnology in Repository");
+		EntityManager em = this.entityManagerFactory.createEntityManager();
+		try {
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			em.merge(entity);
+			et.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+
+		}
+		return false;
+	}
+
+	@Override
+	public List<TechnologyEntity> findByView(int id) {
+		log.info("Running findByView in repository ");
+		EntityManager manager = this.entityManagerFactory.createEntityManager();
+		try {
+			Query query = manager.createNamedQuery("findByView");
+			Query setParameter = query.setParameter("byId", id);
+			log.info("setParameter : " + setParameter);
+			List<TechnologyEntity> list = query.getResultList();
+			log.info("Total list found in repo " + list.size());
+			return list;
+		} finally {
+			manager.close();
+			log.info("Released the connection");
+		}
+	}
+
+	@Override
+	public ApplicationEntity findById(int id) {
+		log.info("findById(int id) " + id);
+		EntityManager entityManager = this.entityManagerFactory.createEntityManager();
+		try {
+			Query query = entityManager.createNamedQuery("findById");
+			query.setParameter("byId", id);
+			ApplicationEntity result = (ApplicationEntity) query.getSingleResult();
+			log.info("" + result);
+			return result;
+		} catch (NoResultException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} finally {
+			entityManager.close();
+		}
+
+		return ApplicationRepository.super.findById(id);
 	}
 
 }

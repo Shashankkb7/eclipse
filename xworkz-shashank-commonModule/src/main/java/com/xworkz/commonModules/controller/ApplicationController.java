@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.xworkz.commonModules.dto.ApplicationDTO;
+import com.xworkz.commonModules.dto.TechnologyDTO;
 import com.xworkz.commonModules.service.ApplicationService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -104,7 +106,8 @@ public class ApplicationController {
 //}
 
 	@PostMapping("/signIn")
-	public String onSignIn(Model model, @RequestParam String userId, @RequestParam String password,HttpServletRequest request) {
+	public String onSignIn(Model model, @RequestParam String userId, @RequestParam String password,
+			HttpServletRequest request) {
 		log.info("Running on SignIn " + userId + password);
 		try {
 			ApplicationDTO dto = this.applicationService.findByUserAndPassword(userId, password);
@@ -115,8 +118,8 @@ public class ApplicationController {
 				return "SignIn";
 			}
 			if (dto != null) {
-				
-				if (dto.isResetPassword()==true) {
+
+				if (dto.isResetPassword() == true) {
 					if (!dto.getLoginTime().isAfter(LocalTime.now())) {
 						log.info("Running in time verifying condition");
 						model.addAttribute("msgs", "Time out please reset password again");
@@ -130,7 +133,7 @@ public class ApplicationController {
 				}
 				System.currentTimeMillis();
 				log.info("UserId and password are match");
-				HttpSession httpSession= request.getSession(true);
+				HttpSession httpSession = request.getSession(true);
 				httpSession.setAttribute("userId", dto.getUserId());
 				httpSession.setAttribute("dtoPic", dto.getPicName());
 				httpSession.setAttribute("dto", dto);
@@ -149,7 +152,8 @@ public class ApplicationController {
 		ApplicationDTO udto = this.applicationService.reSetPassword(email);
 		if (udto.isResetPassword() == true) {
 			log.info("Password reset sucessful plz login with in 2 min with otp");
-			model.addAttribute("message1", "Password reset successful please login within 2 min otherwise password expired");
+			model.addAttribute("message1",
+					"Password reset successful please login within 2 min otherwise password expired");
 			return "ResetPassword";
 		}
 		return "ResetPassword";
@@ -161,11 +165,10 @@ public class ApplicationController {
 		model.addAttribute("message2", "Password Update successful");
 		return "UpdatePassword";
 	}
-	
+
 	@PostMapping("/upload")
 	public String onUpload(@RequestParam("bhavaChitra") MultipartFile multipartFile, String userId, String email,
-			Long mobile, Model model) throws IOException
-	{
+			Long mobile, Model model) throws IOException {
 		log.info("multipartFile" + multipartFile);
 		log.info(multipartFile.getOriginalFilename());
 		log.info(multipartFile.getContentType());
@@ -187,7 +190,7 @@ public class ApplicationController {
 		this.applicationService.updateProfile(userId, email, mobile, imageName);
 		return "ProfileUpdate";
 	}
-	
+
 	@GetMapping("/download")
 	public void onDownload(HttpServletResponse response, @RequestParam String fileName, ApplicationDTO appDto)
 			throws IOException {
@@ -201,5 +204,50 @@ public class ApplicationController {
 		response.flushBuffer();
 
 	}
-	
+
+	@GetMapping("/addTechnology")
+	public String onTechnology(Model model, int id) {
+		log.info("@getmapping addTechnology ,id " + id);
+		ApplicationDTO dto = this.applicationService.findById(id);
+		log.info("dto : " + dto);
+		model.addAttribute("getUserId", dto.getUserId());
+		model.addAttribute("id", id);
+		return "Add";
+	}
+
+	@PostMapping("/addTechnology")
+	public String onTechnology(Model model, TechnologyDTO dto, int id) {
+		log.info("@PostMapping(/addtechnology) TechnologyDTO dto = " + dto + "  ID : " + id);
+		dto.setId(id);
+		ApplicationDTO dto1 = this.applicationService.findById(id);
+		model.addAttribute("dto1", dto1);
+		model.addAttribute("id", id);
+		Set<ConstraintViolation<TechnologyDTO>> violations = this.applicationService.validateAndAddTechnology(dto);
+		if (violations.isEmpty()) {
+			log.info("There is no violations can add a technology");
+			model.addAttribute("addTechSuccess", "Successfully added the technology : " + dto.getName());
+			return "Add";
+		}
+		log.info("Violations in the technology, can't add it");
+		model.addAttribute("error", violations);
+		return "Add";
+	}
+
+	@GetMapping("/viewTechnology")
+	public String onView(Model model, @RequestParam int id) {
+		log.info("listTechnology " + id);
+		ApplicationDTO dto = this.applicationService.findById(id);
+		model.addAttribute("dto", dto);
+		model.addAttribute("id", id);
+		List<TechnologyDTO> dtos = this.applicationService.findByView(id);
+		if (dtos.isEmpty()) {
+			log.info("There is no technologies added");
+			model.addAttribute("emptyTechnologies", "There is no technologies added");
+			return "LoginSuccess";
+		}
+		log.info("dtos.size()" + dtos.size());
+		model.addAttribute("dtos", dtos);
+		return "Technologies";
+	}
+
 }

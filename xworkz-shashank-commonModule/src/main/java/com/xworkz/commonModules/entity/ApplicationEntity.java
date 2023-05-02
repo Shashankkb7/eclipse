@@ -19,6 +19,7 @@ import lombok.Data;
 @NamedQuery(name = "userId",query = "select count(*) from  ApplicationEntity ent where ent.userId=:userBy")
 @NamedQuery(name = "emailId",query = "select count(*) from  ApplicationEntity ent where ent.email=:emailBy")
 @NamedQuery(name = "mobileId",query = "select count(*) from  ApplicationEntity ent where ent.mobile=:mobileBy")
+@NamedQuery(name = "findById", query = "select entity from ApplicationEntity entity where entity.id=:byId")
 @NamedQuery(name="findBySignIn",query = "select entity from ApplicationEntity entity where entity.userId=:us")
 @NamedQuery(name="updateLoginCount",query="update ApplicationEntity entity set entity.loginCount=:count where entity.userId=:user")
 @NamedQuery(name="resetEmail",query="select entity from ApplicationEntity entity where entity.email=:email")
@@ -27,28 +28,42 @@ public class ApplicationEntity {
 	@Id
 	@Column(name = "a_id")
 	private int id;
+	
 	@Column(name = "a_userId")
 	private String userId;
+	
 	@Column(name = "a_email")
 	private String email;
+	
 	@Column(name = "a_mobile")
 	private Long mobile;
+	
 	@Column(name = "a_password")
 	private String password;
+	
 	@Column(name = "a_createdBy")
 	private String createdBy;
+	
 	@Column(name = "a_createdDate")
 	private LocalDateTime createdDate;
+	
 	@Column(name = "a_updatedBy")
 	private String updatedBy;
+	
 	@Column(name = "a_updatedDate")
 	private LocalDateTime updatedDate;
+	
 	@Column(name="a_loginCount")
 	private int loginCount;
+	
 	@Column(name="a_resetPassword")
 	private boolean resetPassword;
+	
 	@Column(name="a_otptimer")
 	private LocalTime loginTime;
+	
 	@Column(name="a_picName")
 	private String picName;
+	
+	
 }
